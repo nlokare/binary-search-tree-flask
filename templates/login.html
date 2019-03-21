@@ -4,6 +4,11 @@
     <h1 style="text-align:center;">BST maxSum Calculator</h1>
     <div class="box">
       <h1>Log In</h1>
+      {% if error %}
+        <div class="msg">
+          <p class=error><strong>Error: {{ error }}</strong>
+        </div>  
+      {% endif %}
       <form action="/login" method="post" id="login">
         <input type="text" name="username" id="username" placeholder="Username" required/>
         <br>

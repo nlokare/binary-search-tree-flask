@@ -36,17 +36,17 @@ def get_user(username, password):
     db = sqlite.connect(DATABASE)
     cur = db.cursor()
     cur.execute('SELECT * from users WHERE username = ? AND password = ?', [username, password])
-    users = cur.fetchall()
+    user = cur.fetchone()
     db.close()
-    return users
+    return user
 
 def check_existing_user(username):
     db = sqlite.connect(DATABASE)
     cur = db.cursor()
     cur.execute('SELECT * from users WHERE username = ?', [username])
-    users = cur.fetchall()
+    user = cur.fetchone()
     db.close()
-    return users
+    return user
 
 def insert_user(username, password):
     db = sqlite.connect(DATABASE)
@@ -76,8 +76,11 @@ def login():
         username = request.form['username']
         password = request.form['password']
         user = get_user(username, password)
-        if len(user):
+        if user:
             return redirect(url_for('bst'))
+        else:
+            error = 'Invalid username/password. Please try again'
+            return render_template('login.html', error=error)
     elif request.method == 'GET':
         return render_template('login.html')
 
@@ -88,7 +91,7 @@ def register():
         username = request.form['username']
         password = request.form['password']
         user = check_existing_user(username)
-        if len(user):
+        if user:
             error = 'User already exists'
             return render_template('index.html', error=error)
         else:
