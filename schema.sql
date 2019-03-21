@@ -1,0 +1,1 @@
+CREATE TABLE users (username TEXT PRIMARY_KEY, password TEXT)

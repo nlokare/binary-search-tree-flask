@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+    <body>
+      <h1 style="text-align:center;">BST maxSum Calculator</h1>
+      <div class="box bstBox">
+        <h1>Binary Search Tree Max Sum</h1>
+        <form action="/maxSum" method="post">
+          <input type="text" name="bst_vals" id="bst-vals" placeholder="Enter a list of comma separated numbers to create a BST and find the sum of the longest path" required/>
+          <input type="submit" class="button maxSum" value="Calculate maxSum"/>
+        </form>
+        {% if max_sum %}
+          <div class="msg">
+            <h3 class="maxSum">Max sum of {{ max_sum }} for binary tree created from values {{ binary_tree_vals }}</h3>
+          </div>
+        {% endif %}
+      </div>
+</body>
+{% endblock %}
